@@ -1,5 +1,10 @@
 from nltk.corpus import wordnet as wn
 #from metonym import WordNetGraph
+
+
+import sys
+sys.path.insert(0, '../syn_sim')
+
 from syn_sim import WordNetGraph
 from argparse import ArgumentParser
 
@@ -9,11 +14,11 @@ def main(graph_file, word1, word2):
     syns2 = wn.synsets(word2)
     print("\n===The meaning of each word sense===")
     for syn in syns1 + syns2:
-        print("%s\t%s\t%s" %(syn.name, ":", syn.definition))
+        print("%s\t%s\t%s" %(syn.name(), ":", syn.definition()))
     print("\n===Comparing synset of one term with the synset of another===")
     for syn1 in syns1:
         for syn2 in syns2:
-            print("%s\t%s\t%s" %(syn1.name, syn2.name, wngraph.path_similarity(syn1, syn2)))
+            print("%s\t%s\t%s" %(syn1.name(), syn2.name(), wngraph.path_similarity(syn1, syn2)))
 
 
 if __name__ == "__main__":
